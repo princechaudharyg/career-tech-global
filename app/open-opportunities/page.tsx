@@ -6,6 +6,7 @@ import HiringPartners from "@/components/opportunities/HiringPartners";
 import CareerResources from "@/components/opportunities/CareerResources";
 import CTA from "@/components/opportunities/CTA";
 
+
 export default function OpenOpportunitiesPage() {
   return (
     <main className="pt-20">
