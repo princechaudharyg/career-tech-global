@@ -65,3 +65,7 @@ project.txt
 structure.txt
 tree.txt
 unimported.txt
+
+# Local-only development artifacts
+/components/programs/_unused/
+/skills-lock.json
