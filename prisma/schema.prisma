@@ -5,10 +5,3 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
-
-model TestUser {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  createdAt DateTime @default(now())
-}
