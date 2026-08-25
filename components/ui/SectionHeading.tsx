@@ -1,27 +1,47 @@
+import Badge from "./Badge";
+
 type SectionHeadingProps = {
-    badge: string;
-    title: string;
-    description: string;
-  };
-  
-  export default function SectionHeading({
-    badge,
-    title,
-    description,
-  }: SectionHeadingProps) {
-    return (
-      <div className="mx-auto max-w-3xl text-center">
-        <span className="inline-flex rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700">
-          {badge}
-        </span>
-  
-        <h2 className="mt-6 text-4xl font-extrabold text-slate-900 md:text-5xl">
-          {title}
-        </h2>
-  
-        <p className="mt-6 text-lg leading-8 text-slate-600">
+  badge?: string;
+  title: string;
+  highlight?: string;
+  description?: string;
+  center?: boolean;
+};
+
+export default function SectionHeading({
+  badge,
+  title,
+  highlight,
+  description,
+  center = true,
+}: SectionHeadingProps) {
+  return (
+    <div
+      className={`max-w-3xl ${
+        center ? "mx-auto text-center" : ""
+      }`}
+    >
+      {badge && <Badge>{badge}</Badge>}
+
+      <h2 className="heading-lg mt-6">
+        {title}
+
+        {highlight && (
+          <>
+            <br />
+
+            <span className="gradient-text">
+              {highlight}
+            </span>
+          </>
+        )}
+      </h2>
+
+      {description && (
+        <p className="paragraph mt-6">
           {description}
         </p>
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
+}

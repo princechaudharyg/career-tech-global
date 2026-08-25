@@ -1,19 +1,25 @@
-import ProgramsHero from "../../components/programs/ProgramsHero";
-import BatchPrograms from "../../components/programs/BatchPrograms";
-import OneToOnePrograms from "../../components/programs/OneToOnePrograms";
-import ProgramComparison from "../../components/programs/ProgramComparison";
-import LearningJourney from "../../components/programs/LearningJourney";
-import IndustryRecognition from "../../components/programs/IndustryRecognition";
+import ProgramsHero from "@/components/programs/ProgramsHero";
+import FeaturedPrograms from "@/components/programs/FeaturedPrograms";
+import PricingPlans from "@/components/programs/PricingPlans";
+import Curriculum from "@/components/programs/Curriculum";
+import LearningTimeline from "@/components/programs/LearningTimeline";
+import CareerOutcomes from "@/components/programs/CareerOutcomes";
+import HiringPartners from "@/components/programs/HiringPartners";
+import FAQ from "@/components/programs/FAQ";
+import CTA from "@/components/programs/CTA";
 
 export default function ProgramsPage() {
   return (
-    <main className="pt-20">
+    <main className="bg-white pt-20">
       <ProgramsHero />
-      <BatchPrograms />
-      <OneToOnePrograms />
-      <ProgramComparison />
-      <LearningJourney />
-      <IndustryRecognition />
+      <FeaturedPrograms />
+      <PricingPlans />
+      <Curriculum />
+      <LearningTimeline />
+      <CareerOutcomes />
+      <HiringPartners />
+      <FAQ />
+      <CTA />
     </main>
   );
 }

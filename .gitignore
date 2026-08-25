@@ -39,3 +39,29 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/generated/prisma
+
+# Local AI/editor metadata and generated audit files
+.agents/
+.claude/
+.windsurf/
+components.txt
+depcheck.txt
+files.txt
+project.txt
+structure.txt
+tree.txt
+unimported.txt
+
+# Local AI/editor metadata and generated audit files
+.agents/
+.claude/
+.windsurf/
+components.txt
+depcheck.txt
+files.txt
+project.txt
+structure.txt
+tree.txt
+unimported.txt

@@ -16,9 +16,58 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Career Tech Global LLC",
+  title: {
+    default: "Career Tech Global LLC",
+    template: "%s | Career Tech Global LLC",
+  },
+
   description:
-    "AI, Data Science, Cyber Security & Career Development Platform",
+    "Career Tech Global LLC helps professionals launch high-paying careers in Artificial Intelligence, Data Science, Cyber Security, Cloud Computing and emerging technologies through industry-focused training and career services.",
+
+  keywords: [
+    "Career Tech Global LLC",
+    "Artificial Intelligence",
+    "Generative AI",
+    "Machine Learning",
+    "Data Science",
+    "Cyber Security",
+    "Cloud Computing",
+    "IT Training",
+    "Career Services",
+    "Online Tech Courses",
+  ],
+
+  authors: [
+    {
+      name: "Career Tech Global LLC",
+    },
+  ],
+
+  creator: "Career Tech Global LLC",
+
+  publisher: "Career Tech Global LLC",
+
+  metadataBase: new URL("https://careertechglobal.com"),
+
+  openGraph: {
+    title: "Career Tech Global LLC",
+
+    description:
+      "Build your future with AI, Data Science & Cyber Security.",
+
+    url: "https://careertechglobal.com",
+
+    siteName: "Career Tech Global LLC",
+
+    locale: "en_US",
+
+    type: "website",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -29,12 +78,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col bg-white">
+      <body className="min-h-screen bg-background text-foreground antialiased">
         <Navbar />
 
-        <main className="flex-1">{children}</main>
+        <div className="flex-1">{children}</div>
 
         <Footer />
       </body>

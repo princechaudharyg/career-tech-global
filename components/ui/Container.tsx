@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-type ContainerProps = {
+type Props = {
   children: ReactNode;
   className?: string;
 };
@@ -8,10 +8,18 @@ type ContainerProps = {
 export default function Container({
   children,
   className = "",
-}: ContainerProps) {
+}: Props) {
+
   return (
-    <div className={`mx-auto max-w-7xl px-6 ${className}`}>
+
+    <div
+      className={`container-custom ${className}`}
+    >
+
       {children}
+
     </div>
+
   );
+
 }

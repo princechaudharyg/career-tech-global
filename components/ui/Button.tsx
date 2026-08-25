@@ -14,16 +14,17 @@ export default function Button({
   variant = "primary",
   className = "",
 }: ButtonProps) {
-  const styles =
+
+  const classes =
     variant === "primary"
-      ? "bg-blue-600 text-white hover:bg-blue-700"
-      : "border border-blue-600 text-blue-600 hover:bg-blue-50";
+      ? "btn-primary"
+      : "btn-secondary";
 
   if (href) {
     return (
       <Link
         href={href}
-        className={`inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition ${styles} ${className}`}
+        className={`${classes} ${className}`}
       >
         {children}
       </Link>
@@ -32,7 +33,7 @@ export default function Button({
 
   return (
     <button
-      className={`inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition ${styles} ${className}`}
+      className={`${classes} ${className}`}
     >
       {children}
     </button>

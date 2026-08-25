@@ -1,27 +1,23 @@
 import Hero from "@/components/home/Hero";
+import TrustSection from "@/components/home/TrustSection";
 import Programs from "@/components/home/Programs";
 import WhyChoose from "@/components/home/WhyChoose";
-import LearningExperience from "@/components/home/LearningExperience";
-import CareerJourney from "@/components/home/CareerJourney";
-import Testimonials from "@/components/home/Testimonials";
-import HowItWorks from "@/components/home/HowItWorks";
-import Outcomes from "@/components/home/Outcomes";
-import FAQ from "@/components/home/FAQ";
-import CTA from "@/components/home/CTA";
+import Comparison from "@/components/home/Comparison";
+import TrustedCompany from "@/components/home/TrustedCompany";
+import FAQ from "@/components/career-services/FAQ";
+import FinalCTA from "@/components/career-services/FinalCTA";
 
 export default function Home() {
   return (
-    <>
+    <main className="min-h-screen overflow-x-hidden bg-[#050816] text-white">
       <Hero />
+      <TrustSection />
       <Programs />
       <WhyChoose />
-      <LearningExperience />
-      <CareerJourney />
-      <Testimonials />
-      <HowItWorks />
-      <Outcomes />
+      <Comparison />
+      <TrustedCompany />
       <FAQ />
-      <CTA />
-    </>
+      <FinalCTA />
+    </main>
   );
 }

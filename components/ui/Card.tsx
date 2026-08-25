@@ -11,7 +11,18 @@ export default function Card({
 }: CardProps) {
   return (
     <div
-      className={`rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-xl ${className}`}
+      className={`
+        rounded-[28px]
+        border
+        border-slate-200
+        bg-white
+        shadow-lg
+        transition-all
+        duration-300
+        hover:-translate-y-2
+        hover:shadow-2xl
+        ${className}
+      `}
     >
       {children}
     </div>
