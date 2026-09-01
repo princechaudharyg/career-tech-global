@@ -69,3 +69,7 @@ unimported.txt
 # Local-only development artifacts
 /components/programs/_unused/
 /skills-lock.json
+.vercel
+.env*
+
+/lib/generated/
