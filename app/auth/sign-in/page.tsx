@@ -29,7 +29,7 @@ export default function SignInPage() {
       return;
     }
 
-    window.location.href = "/open-opportunities";
+    window.location.href = "/dashboard";
   }
 
   return (

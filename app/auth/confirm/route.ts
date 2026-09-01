@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
   const type = searchParams.get("type") as EmailOtpType | null;
 
   const redirectTo = request.nextUrl.clone();
-  redirectTo.pathname = "/open-opportunities";
+  redirectTo.pathname = "/dashboard";
   redirectTo.searchParams.delete("token_hash");
   redirectTo.searchParams.delete("type");
 
@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  redirectTo.pathname = "/open-opportunities";
+  redirectTo.pathname = "/dashboard";
   redirectTo.searchParams.set("auth_error", "confirmation_failed");
 
   return NextResponse.redirect(redirectTo);
