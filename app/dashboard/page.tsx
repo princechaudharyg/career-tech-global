@@ -22,6 +22,10 @@ export default async function DashboardPage() {
     .eq("id", user.id)
     .single();
 
+  const profileStatus = profileError ? `Profile error: ${profileError.message}` : `Profile loaded: ${profile ? "yes" : "no"}`;
+
+  const profileStatus = profileError ? `Profile error: ${profileError.message}` : `Profile loaded: ${profile ? "yes" : "no"}`;
+
   const name = profile?.full_name?.trim() || "User";
   const role = profile?.role || "user";
 
@@ -104,4 +108,7 @@ export default async function DashboardPage() {
     </main>
   );
 }
+
+
+
 
