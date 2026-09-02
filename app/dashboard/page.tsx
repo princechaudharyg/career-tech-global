@@ -38,7 +38,7 @@ export default async function DashboardPage() {
           </p>
 
           <h1 className="text-3xl font-bold leading-tight sm:text-4xl">
-            Welcome, {name}! <span aria-hidden="true">👋</span>
+            Welcome, {name}! <span aria-hidden="true">??</span>
           </h1>
 
           <p className="mt-3 break-all text-sm text-slate-400 sm:text-base">
@@ -54,7 +54,7 @@ export default async function DashboardPage() {
             <div className="flex h-full flex-col justify-between">
               <div>
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-400/10 text-2xl">
-                  🌍
+                  ??
                 </div>
 
                 <h2 className="text-xl font-bold text-white sm:text-2xl">
@@ -67,14 +67,14 @@ export default async function DashboardPage() {
               </div>
 
               <span className="mt-6 text-sm font-semibold text-cyan-400">
-                View opportunities →
+                View opportunities ?
               </span>
             </div>
           </Link>
 
           <div className="min-h-[190px] rounded-2xl border border-slate-700 bg-slate-900 p-7">
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-400/10 text-2xl">
-              ✓
+              ?
             </div>
 
             <h2 className="text-xl font-bold text-white sm:text-2xl">
