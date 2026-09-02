@@ -90,6 +90,33 @@ export default async function DashboardPage() {
               </p>
             </div>
           </div>
+
+          {role === "admin" && (
+            <Link
+              href="/admin"
+              className="group min-h-[190px] rounded-2xl border border-slate-700 bg-slate-900 p-7 transition duration-200 hover:-translate-y-1 hover:border-purple-400 hover:bg-slate-800"
+            >
+              <div className="flex h-full flex-col justify-between">
+                <div>
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-purple-400/10 text-2xl">
+                    🔐
+                  </div>
+
+                  <h2 className="text-xl font-bold text-white sm:text-2xl">
+                    Admin Panel
+                  </h2>
+
+                  <p className="mt-3 max-w-md text-sm leading-6 text-slate-400 sm:text-base">
+                    Manage users, roles, and platform settings.
+                  </p>
+                </div>
+
+                <span className="mt-6 text-sm font-semibold text-purple-400">
+                  Open admin panel →
+                </span>
+              </div>
+            </Link>
+          )}
         </div>
 
         <form action="/auth/sign-out" method="post" className="mt-8 flex justify-end">
