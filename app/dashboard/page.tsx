@@ -16,15 +16,15 @@ export default async function DashboardPage() {
     redirect("/auth/sign-in");
   }
 
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("full_name, role")
     .eq("id", user.id)
     .single();
 
-  const profileStatus = profileError ? `Profile error: ${profileError.message}` : `Profile loaded: ${profile ? "yes" : "no"}`;
-
-  const profileStatus = profileError ? `Profile error: ${profileError.message}` : `Profile loaded: ${profile ? "yes" : "no"}`;
+  const profileStatus = profileError
+    ? `Profile error: ${profileError.message}`
+    : `Profile loaded: ${profile ? "yes" : "no"}`;
 
   const name = profile?.full_name?.trim() || "User";
   const role = profile?.role || "user";
@@ -92,6 +92,10 @@ export default async function DashboardPage() {
               <p className="text-emerald-400">
                 Profile connected to Supabase
               </p>
+
+              <p className="text-xs text-yellow-300">
+                {profileStatus}
+              </p>
             </div>
           </div>
         </div>
@@ -108,7 +112,3 @@ export default async function DashboardPage() {
     </main>
   );
 }
-
-
-
-
