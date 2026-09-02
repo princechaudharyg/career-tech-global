@@ -20,7 +20,9 @@ export default async function AdminPage() {
     .eq("id", user.id)
     .single();
 
-  if (profile?.role !== "admin") {
+  const role = profile?.role ?? "user";
+
+  if (role !== "admin") {
     redirect("/dashboard");
   }
 
