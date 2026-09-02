@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
@@ -31,14 +31,14 @@ export default async function AdminUsersPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <main className="min-h-screen bg-slate-950 px-4 pb-16 pt-16 text-white sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-slate-950 px-4 pb-16 pt-48 text-white sm:px-6 sm:pt-52 lg:px-8">
       <section className="mx-auto w-full max-w-6xl">
         <div className="mb-10">
           <Link
             href="/admin"
             className="text-sm font-semibold text-cyan-400 hover:underline"
           >
-            ← Back to Admin
+            â† Back to Admin
           </Link>
 
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">
@@ -67,7 +67,7 @@ export default async function AdminUsersPage() {
               {users?.map((u) => (
                 <tr key={u.id} className="hover:bg-slate-800/50">
                   <td className="px-6 py-4 text-slate-200">
-                    {u.full_name || "—"}
+                    {u.full_name || "â€”"}
                   </td>
                   <td className="px-6 py-4">
                     <span
@@ -106,3 +106,4 @@ export default async function AdminUsersPage() {
     </main>
   );
 }
+
