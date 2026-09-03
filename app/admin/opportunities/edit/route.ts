@@ -28,45 +28,44 @@ export async function POST(request: NextRequest) {
 
   const formData = await request.formData();
 
+  const opportunityId = formData.get("opportunityId");
   const title = formData.get("title");
-  const company = formData.get("company");
+  const organization = formData.get("organization");
   const location = formData.get("location");
-  const workMode = formData.get("workMode");
-  const jobType = formData.get("jobType");
-  const experienceLevel = formData.get("experienceLevel");
+  const opportunityType = formData.get("opportunityType");
   const description = formData.get("description");
-  const skills = formData.get("skills");
   const applyUrl = formData.get("applyUrl");
+  const deadline = formData.get("deadline");
   const isPublished = formData.get("isPublished");
 
   if (
+    typeof opportunityId !== "string" ||
     typeof title !== "string" ||
     title.trim() === "" ||
-    typeof company !== "string" ||
-    company.trim() === ""
+    typeof organization !== "string" ||
+    organization.trim() === "" ||
+    typeof opportunityType !== "string" ||
+    opportunityType.trim() === ""
   ) {
     return NextResponse.redirect(new URL("/admin/opportunities", request.url), 303);
   }
 
-  const skillsArray =
-    typeof skills === "string" && skills.trim() !== ""
-      ? skills.split(",").map((s) => s.trim()).filter(Boolean)
-      : [];
+  const { error: updateError } = await supabase
+    .from("opportunities")
+    .update({
+      title: title.trim(),
+      organization: organization.trim(),
+      location: typeof location === "string" ? location.trim() : null,
+      opportunity_type: opportunityType.trim(),
+      description: typeof description === "string" ? description.trim() : null,
+      apply_url: typeof applyUrl === "string" && applyUrl.trim() !== "" ? applyUrl.trim() : null,
+      deadline: typeof deadline === "string" && deadline.trim() !== "" ? deadline : null,
+      is_published: isPublished === "on",
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", opportunityId);
 
-  const { error: insertError } = await supabase.from("opportunities").insert({
-    title: title.trim(),
-    company: company.trim(),
-    location: typeof location === "string" && location.trim() !== "" ? location.trim() : null,
-    work_mode: typeof workMode === "string" ? workMode.trim() : "Remote",
-    job_type: typeof jobType === "string" ? jobType.trim() : "Full Time",
-    experience_level: typeof experienceLevel === "string" ? experienceLevel.trim() : "Entry Level",
-    description: typeof description === "string" && description.trim() !== "" ? description.trim() : null,
-    skills: skillsArray.length > 0 ? skillsArray : null,
-    apply_url: typeof applyUrl === "string" && applyUrl.trim() !== "" ? applyUrl.trim() : null,
-    is_published: isPublished === "on",
-  });
-
-  if (insertError) {
+  if (updateError) {
     return NextResponse.redirect(new URL("/admin/opportunities", request.url), 303);
   }
 
