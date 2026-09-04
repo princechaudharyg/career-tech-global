@@ -1,0 +1,378 @@
+@import "tailwindcss";
+
+/* =====================================================
+   CAREER TECH GLOBAL LLC
+   GLOBAL DESIGN SYSTEM
+===================================================== */
+
+:root {
+  /* Brand */
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --accent: #06b6d4;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  /* Background */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --muted: #64748b;
+  --border: #e2e8f0;
+
+  /* Radius */
+  --radius-xs: 10px;
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 36px;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 12px 40px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 25px 80px rgba(15, 23, 42, 0.12);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* =====================================================
+   BASE
+===================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(6, 182, 212, 0.1),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(37, 99, 235, 0.08),
+      transparent 30%
+    ),
+    var(--background);
+
+  color: var(--foreground);
+
+  font-family:
+    var(--font-geist-sans),
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+::selection {
+  background: #2563eb;
+  color: white;
+}
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eef2ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #06b6d4, #2563eb);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* =====================================================
+   LAYOUT
+===================================================== */
+
+.section-padding {
+  @apply py-24 lg:py-32;
+}
+
+.container-custom {
+  @apply mx-auto max-w-7xl px-6 lg:px-8;
+}
+
+/* =====================================================
+   TYPOGRAPHY
+===================================================== */
+
+.heading-xl {
+  @apply text-5xl font-black leading-[1.05] tracking-tight lg:text-7xl;
+}
+
+.heading-lg {
+  @apply text-4xl font-black tracking-tight lg:text-6xl;
+}
+
+.heading-md {
+  @apply text-3xl font-bold lg:text-4xl;
+}
+
+.paragraph {
+  @apply text-lg leading-8 text-slate-600;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-4 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-2xl border border-cyan-500 bg-white px-8 py-4 font-semibold text-cyan-600 transition-all duration-300 hover:bg-cyan-50;
+}
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.card {
+  @apply rounded-[28px] border border-slate-200 bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* =====================================================
+   TEXT
+===================================================== */
+
+.gradient-text {
+  @apply bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent;
+}
+
+/* =====================================================
+   SHADOWS
+===================================================== */
+
+.glow-blue {
+  box-shadow:
+    0 0 40px rgba(6, 182, 212, 0.15),
+    0 0 80px rgba(37, 99, 235, 0.1);
+}
+
+/* =====================================================
+   EFFECTS
+===================================================== */
+
+.hover-lift {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-10px);
+}
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+input,
+textarea,
+select {
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #06b6d4;
+  box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.15);
+}
+
+/* =====================================================
+   PREMIUM ANIMATION
+===================================================== */
+
+.fade-up {
+  animation: fadeUp 0.6s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================================================
+   DATA SCIENCE AND AI PAGE TYPOGRAPHY
+===================================================== */
+
+.program-page .text-8xl {
+  font-size: 4.6rem !important;
+  line-height: 0.98 !important;
+}
+
+.program-page .text-7xl {
+  font-size: 4rem !important;
+  line-height: 1 !important;
+}
+
+.program-page .text-6xl {
+  font-size: 3.25rem !important;
+  line-height: 1.05 !important;
+}
+
+.program-page .text-5xl {
+  font-size: 2.75rem !important;
+  line-height: 1.08 !important;
+}
+
+.program-page .text-4xl {
+  font-size: 2.15rem !important;
+  line-height: 1.12 !important;
+}
+
+.program-page .text-3xl {
+  font-size: 1.75rem !important;
+  line-height: 1.18 !important;
+}
+
+.program-page .text-2xl {
+  font-size: 1.4rem !important;
+  line-height: 1.25 !important;
+}
+
+/* Heading fallback */
+.program-page h1 {
+  font-size: clamp(2.35rem, 5vw, 4.6rem) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.055em !important;
+}
+
+.program-page h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.045em !important;
+}
+
+.program-page h3 {
+  font-size: clamp(1.35rem, 2.5vw, 2.15rem) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.035em !important;
+}
+
+.program-page h4 {
+  font-size: clamp(1.1rem, 2vw, 1.5rem) !important;
+  line-height: 1.2 !important;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .program-page .text-8xl,
+  .program-page .text-7xl {
+    font-size: 3.5rem !important;
+  }
+
+  .program-page .text-6xl {
+    font-size: 2.9rem !important;
+  }
+
+  .program-page .text-5xl {
+    font-size: 2.45rem !important;
+  }
+
+  .program-page .text-4xl {
+    font-size: 2rem !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .program-page .text-8xl,
+  .program-page .text-7xl {
+    font-size: 2.65rem !important;
+    line-height: 1.05 !important;
+  }
+
+  .program-page .text-6xl {
+    font-size: 2.35rem !important;
+  }
+
+  .program-page .text-5xl {
+    font-size: 2rem !important;
+  }
+
+  .program-page .text-4xl {
+    font-size: 1.8rem !important;
+  }
+
+  .program-page .text-3xl {
+    font-size: 1.5rem !important;
+  }
+
+  .program-page .text-2xl {
+    font-size: 1.25rem !important;
+  }
+
+  .program-page h1 {
+    font-size: 2.45rem !important;
+  }
+
+  .program-page h2 {
+    font-size: 2rem !important;
+  }
+
+  .program-page h3 {
+    font-size: 1.45rem !important;
+  }
+}
