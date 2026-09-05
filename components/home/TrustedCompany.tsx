@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUpRight, Building2, Sparkles, Users } from "lucide-react";
+import { ArrowUpRight, Building2, Sparkles, Users, Target, Award } from "lucide-react";
 
 type Company = {
   name: string;
@@ -68,7 +68,7 @@ export default function TrustedCompany() {
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/[0.08] px-4 py-2 text-sm text-cyan-300">
             <Sparkles size={16} />
-            Trusted by ambitious learners
+            Build in-demand skills
           </div>
 
           <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">
@@ -84,24 +84,24 @@ export default function TrustedCompany() {
           </p>
         </div>
 
-        {/* Stats */}
+        {/* Features - Safe language */}
         <div className="mx-auto mt-12 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 text-center backdrop-blur-xl">
             <Building2 className="mx-auto mb-3 text-cyan-300" size={22} />
-            <p className="text-2xl font-bold text-white">100+</p>
-            <p className="mt-1 text-sm text-slate-500">Hiring companies</p>
+            <p className="text-lg font-bold text-white">Industry Partners</p>
+            <p className="mt-1 text-sm text-slate-500">Hiring network</p>
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 text-center backdrop-blur-xl">
             <Users className="mx-auto mb-3 text-blue-300" size={22} />
-            <p className="text-2xl font-bold text-white">10K+</p>
-            <p className="mt-1 text-sm text-slate-500">Career-focused learners</p>
+            <p className="text-lg font-bold text-white">Career Support</p>
+            <p className="mt-1 text-sm text-slate-500">1-on-1 guidance</p>
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 text-center backdrop-blur-xl">
-            <Sparkles className="mx-auto mb-3 text-violet-300" size={22} />
-            <p className="text-2xl font-bold text-white">Industry-led</p>
-            <p className="mt-1 text-sm text-slate-500">Learning ecosystem</p>
+            <Award className="mx-auto mb-3 text-violet-300" size={22} />
+            <p className="text-lg font-bold text-white">Practical Learning</p>
+            <p className="mt-1 text-sm text-slate-500">Real projects</p>
           </div>
         </div>
 

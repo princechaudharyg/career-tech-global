@@ -5,4 +5,96 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Mirrors public.profiles — one row per authenticated user,
+// created via a Supabase trigger on auth.users (id matches auth.users.id).
+model Profile {
+  id        String   @id @db.Uuid
+  fullName  String?  @map("full_name")
+  role      String   @default("user")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  applications Application[]
+  savedJobs    SavedJob[]
+
+  @@map("profiles")
+}
+
+// Mirrors public.opportunities
+model Opportunity {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title           String
+  company         String
+  location        String?
+  workMode        String    @default("Remote") @map("work_mode")
+  jobType         String    @default("Full Time") @map("job_type")
+  experienceLevel String    @default("Entry Level") @map("experience_level")
+  description     String?
+  skills          String[]
+  applyUrl        String?   @map("apply_url")
+  deadline        DateTime? @db.Date
+  isPublished     Boolean   @default(false) @map("is_published")
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  applications Application[]
+  savedBy      SavedJob[]
+
+  @@map("opportunities")
+}
+
+// Mirrors public.applications — a user applying to an opportunity.
+// Includes legacy guest-application fields (fullName, education, etc.)
+// that predate the login-linked applications feature, kept as optional
+// so this schema matches the real table exactly.
+model Application {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId            String?  @map("user_id") @db.Uuid
+  opportunityId     String   @map("opportunity_id") @db.Uuid
+  status            String   @default("pending")
+  fullName          String?  @map("full_name")
+  email             String?
+  phone             String?
+  education         String?
+  skills            String?
+  experience        String?
+  salaryExpectation String?  @map("salary_expectation")
+  coverLetter       String?  @map("cover_letter")
+  appliedAt         DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt         DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  user        Profile?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, opportunityId])
+  @@map("applications")
+}
+
+// Mirrors public.saved_jobs — bookmarked opportunities
+model SavedJob {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId        String   @map("user_id") @db.Uuid
+  opportunityId String   @map("opportunity_id") @db.Uuid
+  savedAt       DateTime @default(now()) @map("saved_at") @db.Timestamptz(6)
+
+  user        Profile     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, opportunityId])
+  @@map("saved_jobs")
+}
+
+// Mirrors public.contact_messages — contact form submissions
+model ContactMessage {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  email     String
+  phone     String?
+  program   String?
+  message   String
+  status    String   @default("new")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("contact_messages")
 }

@@ -204,7 +204,7 @@ export default function CareerOutcomes() {
 
                 {/* Open Opportunities Link */}
                 <Link
-                  href="/opportunities"
+href="/open-opportunities"
                   className={`mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r ${career.color} px-5 py-3 text-sm font-black text-white transition duration-300 hover:scale-[1.02]`}
                 >
                   Explore Career

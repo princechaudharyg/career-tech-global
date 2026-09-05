@@ -258,6 +258,13 @@ export default function Navbar() {
               Book Consultation
             </Link>
 
+            <Link
+              href="/auth/sign-in"
+              className="whitespace-nowrap rounded-full border border-purple-500 px-4 py-2.5 text-[14px] font-semibold text-purple-600 transition hover:bg-purple-50 xl:px-5"
+            >
+              Admin Login
+            </Link>
+
             {isLoggedIn ? (
               <button
                 type="button"
@@ -404,6 +411,14 @@ export default function Navbar() {
                   className="mb-3 flex w-full items-center justify-center rounded-xl border border-cyan-500 px-5 py-3.5 font-semibold text-cyan-600 transition hover:bg-cyan-50"
                 >
                   Book Consultation
+                </Link>
+
+                <Link
+                  href="/auth/sign-in"
+                  onClick={() => setMobileOpen(false)}
+                  className="mb-3 flex w-full items-center justify-center rounded-xl border border-purple-500 px-5 py-3.5 font-semibold text-purple-600 transition hover:bg-purple-50"
+                >
+                  Admin Login
                 </Link>
 
                 {isLoggedIn ? (

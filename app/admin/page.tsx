@@ -44,6 +44,11 @@ export default async function AdminDashboardPage() {
     .from("applications")
     .select("*", { count: "exact", head: true });
 
+  const { count: messagesCount } = await supabase
+    .from("contact_messages")
+    .select("*", { count: "exact", head: true })
+    .eq("status", "new");
+
   return (
     <main className="min-h-screen bg-slate-950 px-4 pb-16 pt-48 text-white sm:px-6 sm:pt-52 lg:px-8">
       <section className="mx-auto w-full max-w-6xl">
@@ -68,7 +73,7 @@ export default async function AdminDashboardPage() {
           </p>
         </div>
 
-        <div className="mb-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
           <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
               Total Users
@@ -102,6 +107,15 @@ export default async function AdminDashboardPage() {
             </p>
             <p className="mt-2 text-4xl font-black text-emerald-400">
               {applicationsCount || 0}
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+              New Messages
+            </p>
+            <p className="mt-2 text-4xl font-black text-amber-400">
+              {messagesCount || 0}
             </p>
           </div>
         </div>
