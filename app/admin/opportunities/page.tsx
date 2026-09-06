@@ -82,11 +82,11 @@ export default async function AdminOpportunitiesPage() {
 
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-slate-200">
-                    Organization
+                    Company
                   </label>
                   <input
                     type="text"
-                    name="organization"
+                    name="company"
                     required
                     className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2.5 text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
                     placeholder="e.g. Google"
@@ -107,18 +107,60 @@ export default async function AdminOpportunitiesPage() {
 
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-slate-200">
-                    Opportunity Type
+                    Work Mode
                   </label>
                   <select
-                    name="opportunityType"
+                    name="workMode"
                     className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2.5 text-slate-100 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
                   >
-                    <option value="Job">Job</option>
+                    <option value="Remote">Remote</option>
+                    <option value="On-site">On-site</option>
+                    <option value="Hybrid">Hybrid</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-slate-200">
+                    Job Type
+                  </label>
+                  <select
+                    name="jobType"
+                    className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2.5 text-slate-100 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+                  >
+                    <option value="Full Time">Full Time</option>
+                    <option value="Part Time">Part Time</option>
                     <option value="Internship">Internship</option>
+                    <option value="Contract">Contract</option>
                     <option value="Program">Program</option>
                     <option value="Scholarship">Scholarship</option>
                     <option value="Hackathon">Hackathon</option>
                   </select>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-slate-200">
+                    Experience Level
+                  </label>
+                  <select
+                    name="experienceLevel"
+                    className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2.5 text-slate-100 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+                  >
+                    <option value="Entry Level">Entry Level</option>
+                    <option value="Mid Level">Mid Level</option>
+                    <option value="Senior Level">Senior Level</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-slate-200">
+                    Salary Range
+                  </label>
+                  <input
+                    type="text"
+                    name="salaryRange"
+                    className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2.5 text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+                    placeholder="e.g. $60,000 - $80,000"
+                  />
                 </div>
 
                 <div>
@@ -129,6 +171,18 @@ export default async function AdminOpportunitiesPage() {
                     type="date"
                     name="deadline"
                     className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2.5 text-slate-100 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+                  />
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label className="mb-2 block text-sm font-semibold text-slate-200">
+                    Skills (comma separated)
+                  </label>
+                  <input
+                    type="text"
+                    name="skills"
+                    className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2.5 text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+                    placeholder="e.g. Python, SQL, Machine Learning"
                   />
                 </div>
 
@@ -191,7 +245,7 @@ export default async function AdminOpportunitiesPage() {
                       Title
                     </th>
                     <th className="w-1/6 whitespace-nowrap px-6 py-4 font-semibold text-white">
-                      Organization
+                      Company
                     </th>
                     <th className="w-1/6 whitespace-nowrap px-6 py-4 font-semibold text-white">
                       Type
@@ -216,10 +270,10 @@ export default async function AdminOpportunitiesPage() {
                           {opp.title}
                         </td>
                         <td className="px-6 py-5 text-slate-300">
-                          {opp.organization}
+                          {opp.company}
                         </td>
                         <td className="px-6 py-5 text-slate-300">
-                          {opp.opportunity_type}
+                          {opp.job_type}
                         </td>
                         <td className="px-6 py-5">
                           <span

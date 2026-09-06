@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import AnimatePage from "@/components/layout/AnimatePage";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -90,7 +91,9 @@ export default function RootLayout({
       <body className="min-h-screen bg-background text-foreground antialiased">
         <Navbar />
 
-        <div className="flex-1">{children}</div>
+        <AnimatePage>
+          <div className="flex-1">{children}</div>
+        </AnimatePage>
 
         <Footer />
       </body>

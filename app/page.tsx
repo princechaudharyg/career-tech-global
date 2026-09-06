@@ -1,6 +1,7 @@
 import Hero from "@/components/home/Hero";
 import TrustSection from "@/components/home/TrustSection";
 import Programs from "@/components/home/Programs";
+import IndustryLeaders from "@/components/home/IndustryLeaders";
 import WhyChoose from "@/components/home/WhyChoose";
 import Comparison from "@/components/home/Comparison";
 import TrustedCompany from "@/components/home/TrustedCompany";
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero />
       <TrustSection />
       <Programs />
+      <IndustryLeaders />
       <WhyChoose />
       <Comparison />
       <TrustedCompany />

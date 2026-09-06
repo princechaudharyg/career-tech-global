@@ -34,6 +34,8 @@ export async function POST(request: NextRequest) {
   const workMode = formData.get("workMode");
   const jobType = formData.get("jobType");
   const experienceLevel = formData.get("experienceLevel");
+  const salaryRange = formData.get("salaryRange");
+  const deadline = formData.get("deadline");
   const description = formData.get("description");
   const skills = formData.get("skills");
   const applyUrl = formData.get("applyUrl");
@@ -45,7 +47,10 @@ export async function POST(request: NextRequest) {
     typeof company !== "string" ||
     company.trim() === ""
   ) {
-    return NextResponse.redirect(new URL("/admin/opportunities", request.url), 303);
+    return NextResponse.redirect(
+      new URL("/admin/opportunities?error=missing-fields", request.url),
+      303
+    );
   }
 
   const skillsArray =
@@ -56,18 +61,44 @@ export async function POST(request: NextRequest) {
   const { error: insertError } = await supabase.from("opportunities").insert({
     title: title.trim(),
     company: company.trim(),
-    location: typeof location === "string" && location.trim() !== "" ? location.trim() : null,
+    location:
+      typeof location === "string" && location.trim() !== ""
+        ? location.trim()
+        : null,
     work_mode: typeof workMode === "string" ? workMode.trim() : "Remote",
     job_type: typeof jobType === "string" ? jobType.trim() : "Full Time",
-    experience_level: typeof experienceLevel === "string" ? experienceLevel.trim() : "Entry Level",
-    description: typeof description === "string" && description.trim() !== "" ? description.trim() : null,
+    experience_level:
+      typeof experienceLevel === "string"
+        ? experienceLevel.trim()
+        : "Entry Level",
+    salary_range:
+      typeof salaryRange === "string" && salaryRange.trim() !== ""
+        ? salaryRange.trim()
+        : null,
+    deadline:
+      typeof deadline === "string" && deadline.trim() !== ""
+        ? deadline.trim()
+        : null,
+    description:
+      typeof description === "string" && description.trim() !== ""
+        ? description.trim()
+        : null,
     skills: skillsArray.length > 0 ? skillsArray : null,
-    apply_url: typeof applyUrl === "string" && applyUrl.trim() !== "" ? applyUrl.trim() : null,
+    apply_url:
+      typeof applyUrl === "string" && applyUrl.trim() !== ""
+        ? applyUrl.trim()
+        : null,
     is_published: isPublished === "on",
   });
 
   if (insertError) {
-    return NextResponse.redirect(new URL("/admin/opportunities", request.url), 303);
+    return NextResponse.redirect(
+      new URL(
+        `/admin/opportunities?error=${encodeURIComponent(insertError.message)}`,
+        request.url,
+      ),
+      303,
+    );
   }
 
   return NextResponse.redirect(new URL("/admin/opportunities", request.url), 303);

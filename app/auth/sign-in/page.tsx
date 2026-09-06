@@ -29,7 +29,11 @@ export default function SignInPage() {
       return;
     }
 
-    window.location.href = "/dashboard";
+    const params = new URLSearchParams(window.location.search);
+    const redirectTo = params.get("redirect");
+
+    window.location.href =
+      redirectTo && redirectTo.startsWith("/") ? redirectTo : "/dashboard";
   }
 
   return (

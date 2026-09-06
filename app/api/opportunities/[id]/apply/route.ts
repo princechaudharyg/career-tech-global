@@ -33,15 +33,36 @@ export async function POST(
     );
   }
 
+  let fullName: string | null = null;
+  let email: string | null = null;
+  let phone: string | null = null;
   let coverNote: string | null = null;
+  let resumeUrl: string | null = null;
+
   try {
     const body = await request.json();
+    fullName =
+      typeof body?.fullName === "string" && body.fullName.trim() !== ""
+        ? body.fullName.trim()
+        : null;
+    email =
+      typeof body?.email === "string" && body.email.trim() !== ""
+        ? body.email.trim()
+        : null;
+    phone =
+      typeof body?.phone === "string" && body.phone.trim() !== ""
+        ? body.phone.trim()
+        : null;
     coverNote =
       typeof body?.coverNote === "string" && body.coverNote.trim() !== ""
         ? body.coverNote.trim()
         : null;
+    resumeUrl =
+      typeof body?.resumeUrl === "string" && body.resumeUrl.trim() !== ""
+        ? body.resumeUrl.trim()
+        : null;
   } catch {
-    // No body sent — that's fine, cover note is optional.
+    // No body sent — all fields stay optional.
   }
 
   const { data, error: insertError } = await supabase
@@ -49,7 +70,11 @@ export async function POST(
     .insert({
       user_id: user.id,
       opportunity_id: opportunityId,
-      cover_note: coverNote,
+      full_name: fullName,
+      email: email,
+      phone: phone,
+      cover_letter: coverNote,
+      resume_url: resumeUrl,
     })
     .select()
     .single();
@@ -57,7 +82,10 @@ export async function POST(
   if (insertError) {
     if (insertError.code === "23505") {
       return NextResponse.json(
-        { error: "You have already applied to this opportunity.", alreadyApplied: true },
+        {
+          error: "You have already applied to this opportunity.",
+          alreadyApplied: true,
+        },
         { status: 409 }
       );
     }
