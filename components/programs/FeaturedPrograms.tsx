@@ -43,7 +43,7 @@ const programs = [
     ],
   },
   {
-    id: "cyber-security",
+    id: "cyber-security-ai",
     title: "Cyber Security",
     label: "Security Career Program",
     icon: IconShieldCheck,
@@ -238,7 +238,7 @@ export default function FeaturedPrograms() {
                   </div>
 
                   <Link
-                    href="/contact"
+                    href={`/programs/${program.id}`}
                     className={`mt-6 flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-black text-white transition hover:opacity-90 ${program.iconClass}`}
                   >
                     Explore Program
