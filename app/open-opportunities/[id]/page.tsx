@@ -41,7 +41,7 @@ export default async function OpportunityDetailPage({
 
   return (
     <main className="min-h-screen bg-slate-950 px-4 pb-20 pt-32 text-white sm:px-6 lg:px-8">
-      <section className="mx-auto w-full max-w-5xl">
+      <section className="mx-auto w-full max-w-6xl">
         <Link
           href="/open-opportunities"
           className="mb-6 inline-flex text-sm font-semibold text-cyan-400 transition hover:text-cyan-300 hover:underline"
@@ -49,7 +49,7 @@ export default async function OpportunityDetailPage({
           ← Back to Opportunities
         </Link>
 
-        <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr]">
+        <div className="grid gap-8 lg:grid-cols-[1.7fr_1fr] lg:items-start">
           {/* Left: Job details */}
           <div className="rounded-2xl border border-slate-700 bg-slate-900 p-7 sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-cyan-400">
@@ -124,7 +124,7 @@ export default async function OpportunityDetailPage({
           </div>
 
           {/* Right: Apply form */}
-          <div className="rounded-2xl border border-slate-700 bg-slate-900 p-7 sm:p-8">
+          <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-2xl border border-slate-700 bg-slate-900 p-7 sm:p-8">
             <ApplyForm
               opportunityId={opportunity.id}
               isLoggedIn={Boolean(user)}

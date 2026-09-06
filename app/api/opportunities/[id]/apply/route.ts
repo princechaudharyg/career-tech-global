@@ -90,8 +90,8 @@ export async function POST(
       );
     }
 
-    return NextResponse.json(
-      { error: "Could not submit application. Please try again." },
+        return NextResponse.json(
+      { error: `Could not submit application: ${insertError.message}` },
       { status: 500 }
     );
   }

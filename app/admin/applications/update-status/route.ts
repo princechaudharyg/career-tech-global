@@ -37,6 +37,7 @@ export async function POST(request: NextRequest) {
   const formData = await request.formData();
   const applicationId = formData.get("applicationId");
   const requestedStatus = formData.get("status");
+  const rejectionReason = formData.get("rejectionReason");
 
   if (
     typeof applicationId !== "string" ||
@@ -51,9 +52,23 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const updatePayload: Record<string, unknown> = {
+    status: requestedStatus,
+    updated_at: new Date().toISOString(),
+  };
+
+  if (requestedStatus === "rejected") {
+    updatePayload.rejection_reason =
+      typeof rejectionReason === "string" && rejectionReason.trim() !== ""
+        ? rejectionReason.trim()
+        : null;
+  } else {
+    updatePayload.rejection_reason = null;
+  }
+
   await supabase
     .from("applications")
-    .update({ status: requestedStatus, updated_at: new Date().toISOString() })
+    .update(updatePayload)
     .eq("id", applicationId);
 
   return NextResponse.redirect(

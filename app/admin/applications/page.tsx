@@ -28,6 +28,7 @@ type ApplicationRow = {
   email: string | null;
   phone: string | null;
   cover_letter: string | null;
+  rejection_reason: string | null;
   created_at: string;
   opportunities: { id: string; title: string; company: string } | null;
   profiles: { full_name: string | null } | null;
@@ -58,7 +59,7 @@ export default async function AdminApplicationsPage() {
   const { data: applicationsData } = await supabase
     .from("applications")
     .select(
-      "id, user_id, status, full_name, email, phone, cover_letter, created_at, opportunities(id, title, company), profiles(full_name)",
+      "id, user_id, status, full_name, email, phone, cover_letter, rejection_reason, created_at, opportunities(id, title, company), profiles(full_name)",
     )
     .order("created_at", { ascending: false });
 
@@ -134,13 +135,25 @@ export default async function AdminApplicationsPage() {
                         </p>
                       )}
 
+                      {application.status === "rejected" &&
+                        application.rejection_reason && (
+                          <div className="mt-3 max-w-2xl rounded-lg border border-red-400/20 bg-red-400/5 p-3">
+                            <p className="text-xs font-semibold uppercase tracking-wider text-red-300">
+                              Rejection reason
+                            </p>
+                            <p className="mt-1 text-sm text-red-200">
+                              {application.rejection_reason}
+                            </p>
+                          </div>
+                        )}
+
                       <p className="mt-3 text-xs text-slate-500">
                         Applied on{" "}
                         {new Date(application.created_at).toLocaleDateString()}
                       </p>
                     </div>
 
-                    <div className="flex flex-col items-end gap-3">
+                    <div className="flex w-full max-w-xs flex-col items-end gap-3">
                       <span
                         className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold capitalize ${
                           statusStyles[application.status] ??
@@ -153,7 +166,7 @@ export default async function AdminApplicationsPage() {
                       <form
                         action="/admin/applications/update-status"
                         method="post"
-                        className="flex items-center gap-2"
+                        className="flex w-full flex-col items-end gap-2"
                       >
                         <input
                           type="hidden"
@@ -161,24 +174,34 @@ export default async function AdminApplicationsPage() {
                           value={application.id}
                         />
 
-                        <select
-                          name="status"
-                          defaultValue={application.status}
-                          className="rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-xs font-semibold text-white"
-                        >
-                          {STATUS_OPTIONS.map((option) => (
-                            <option key={option} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
+                        <div className="flex w-full items-center gap-2">
+                          <select
+                            name="status"
+                            defaultValue={application.status}
+                            className="flex-1 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-xs font-semibold text-white"
+                          >
+                            {STATUS_OPTIONS.map((option) => (
+                              <option key={option} value={option}>
+                                {option}
+                              </option>
+                            ))}
+                          </select>
 
-                        <button
-                          type="submit"
-                          className="rounded-lg bg-cyan-400 px-3 py-2 text-xs font-semibold text-slate-950 transition hover:bg-cyan-300"
-                        >
-                          Update
-                        </button>
+                          <button
+                            type="submit"
+                            className="rounded-lg bg-cyan-400 px-3 py-2 text-xs font-semibold text-slate-950 transition hover:bg-cyan-300"
+                          >
+                            Update
+                          </button>
+                        </div>
+
+                        <textarea
+                          name="rejectionReason"
+                          defaultValue={application.rejection_reason ?? ""}
+                          rows={2}
+                          placeholder="Rejection reason (only used if status = rejected)"
+                          className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-xs text-white placeholder-slate-500"
+                        />
                       </form>
                     </div>
                   </div>
