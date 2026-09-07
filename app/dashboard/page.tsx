@@ -4,6 +4,26 @@ import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
+type ApplicationRow = {
+  id: string;
+  status: string;
+  created_at: string;
+  rejection_reason: string | null;
+  opportunities: {
+    id: string;
+    title: string;
+    company: string;
+  } | null;
+};
+
+const statusStyles: Record<string, string> = {
+  pending: "bg-amber-400/10 text-amber-300 ring-1 ring-inset ring-amber-400/30",
+  reviewed: "bg-cyan-400/10 text-cyan-300 ring-1 ring-inset ring-cyan-400/30",
+  shortlisted: "bg-emerald-400/10 text-emerald-300 ring-1 ring-inset ring-emerald-400/30",
+  rejected: "bg-red-400/10 text-red-300 ring-1 ring-inset ring-red-400/30",
+  hired: "bg-purple-400/10 text-purple-300 ring-1 ring-inset ring-purple-400/30",
+};
+
 export default async function DashboardPage() {
   const supabase = await createClient();
 
@@ -24,6 +44,16 @@ export default async function DashboardPage() {
 
   const name = profile?.full_name?.trim() || "User";
   const role = profile?.role || "user";
+
+  const { data: applicationsData } = await supabase
+    .from("applications")
+    .select(
+      "id, status, created_at, rejection_reason, opportunities(id, title, company)",
+    )
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false });
+
+  const applications = (applicationsData ?? []) as unknown as ApplicationRow[];
 
   return (
     <main className="min-h-screen bg-slate-950 px-4 pb-16 pt-16 text-white sm:px-6 lg:px-8">
@@ -116,6 +146,76 @@ export default async function DashboardPage() {
                 </span>
               </div>
             </Link>
+          )}
+        </div>
+
+        {/* My Applications */}
+        <div className="mt-10">
+          <div className="mb-5 flex items-center justify-between">
+            <h2 className="text-xl font-bold text-white sm:text-2xl">
+              My Applications
+            </h2>
+            <span className="text-sm font-semibold text-slate-400">
+              {applications.length} total
+            </span>
+          </div>
+
+          {applications.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-slate-700 bg-slate-900 p-8 text-center">
+              <p className="text-slate-400">
+                You haven&apos;t applied to any opportunities yet.
+              </p>
+              <Link
+                href="/open-opportunities"
+                className="mt-3 inline-block text-sm font-semibold text-cyan-400 hover:underline"
+              >
+                Browse opportunities →
+              </Link>
+            </div>
+          ) : (
+            <div className="overflow-hidden rounded-2xl border border-slate-700 bg-slate-900">
+              <table className="min-w-full text-left text-sm">
+                <thead className="border-b border-slate-700 bg-slate-800">
+                  <tr>
+                    <th className="px-6 py-4 font-semibold text-white">Role</th>
+                    <th className="px-6 py-4 font-semibold text-white">Company</th>
+                    <th className="px-6 py-4 font-semibold text-white">Applied</th>
+                    <th className="px-6 py-4 font-semibold text-white">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800">
+                  {applications.map((application) => (
+                    <tr key={application.id} className="hover:bg-slate-800/60">
+                      <td className="px-6 py-4 font-medium text-slate-200">
+                        {application.opportunities?.title ?? "Opportunity removed"}
+                      </td>
+                      <td className="px-6 py-4 text-slate-300">
+                        {application.opportunities?.company ?? "—"}
+                      </td>
+                      <td className="px-6 py-4 text-slate-400">
+                        {new Date(application.created_at).toLocaleDateString()}
+                      </td>
+                      <td className="px-6 py-4">
+                        <span
+                          className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold capitalize ${
+                            statusStyles[application.status] ??
+                            "bg-slate-400/10 text-slate-300 ring-1 ring-inset ring-slate-400/30"
+                          }`}
+                        >
+                          {application.status}
+                        </span>
+                        {application.status === "rejected" &&
+                          application.rejection_reason && (
+                            <p className="mt-1.5 max-w-xs text-xs text-red-300">
+                              {application.rejection_reason}
+                            </p>
+                          )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
 

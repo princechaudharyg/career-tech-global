@@ -1,7 +1,6 @@
 "use client";
-
 import { motion } from "framer-motion";
-import { IconQuote, IconRocket, IconHeart } from "@tabler/icons-react";
+import { IconQuote, IconHeart } from "@tabler/icons-react";
 
 export default function FounderStory() {
   return (
@@ -17,22 +16,13 @@ export default function FounderStory() {
           >
             <div className="relative">
               <div className="absolute inset-0 rounded-[40px] bg-gradient-to-r from-cyan-500 to-blue-600 blur-2xl opacity-30" />
-              
+
               <div className="relative aspect-square w-full max-w-md rounded-[40px] bg-gradient-to-br from-cyan-100 to-blue-100 p-8">
-                {/* Placeholder for founder photo */}
-                <div className="flex h-full w-full items-center justify-center rounded-[32px] bg-white">
-                  <div className="text-center">
-                    <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white">
-                      <IconRocket size={48} />
-                    </div>
-                    <p className="mt-6 text-sm font-bold text-slate-500">
-                      Founder Photo
-                    </p>
-                    <p className="mt-2 text-xs text-slate-400">
-                      Add your photo here
-                    </p>
-                  </div>
-                </div>
+                <img
+                  src="/ceo.jpeg"
+                  alt="Founder"
+                  className="h-full w-full rounded-[32px] object-cover"
+                />
               </div>
             </div>
           </motion.div>
@@ -58,21 +48,19 @@ export default function FounderStory() {
 
             <div className="mt-8 space-y-6 text-lg leading-8 text-slate-600">
               <p>
-                Hi, I'm the founder of Career Tech Global LLC. I started this
+                Hi, I&apos;m the founder of Career Tech Global LLC. I started this
                 company with a simple mission: to help professionals like you
                 break into high-growth tech fields without the traditional
                 barriers.
               </p>
-
               <p>
                 After seeing too many talented people struggle with outdated
                 courses and empty promises, I decided to build something
                 different. A platform that focuses on real skills, honest
                 guidance, and genuine career support.
               </p>
-
               <p>
-                We're a young company, but we're committed to transparency,
+                We&apos;re a young company, but we&apos;re committed to transparency,
                 quality, and your success. Every feature, every course, and
                 every service is built with one goal: helping you land your
                 dream job.
@@ -82,7 +70,7 @@ export default function FounderStory() {
             <div className="mt-10 flex items-center gap-4">
               <IconQuote size={32} className="text-cyan-500" />
               <p className="text-lg font-bold text-slate-700 italic">
-                "Your success is the only metric that matters to us."
+                &quot;Your success is the only metric that matters to us.&quot;
               </p>
             </div>
 
@@ -93,7 +81,6 @@ export default function FounderStory() {
               >
                 Learn More About Us
               </a>
-
               <a
                 href="/contact"
                 className="rounded-2xl border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-700 transition hover:border-cyan-500 hover:text-cyan-600"
